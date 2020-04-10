@@ -8,7 +8,7 @@ class Monster(physicalobject.PhysicalObject):
     """Physical object that responds to user input"""
 
     def __init__(self, *args, **kwargs):
-        super().__init__(img=resources.goblin_image, *args, **kwargs)
+        super().__init__(img=resources.monster_image, *args, **kwargs)
 
         self.counter = 0
         self.change_at = randint(20,100)
@@ -33,12 +33,12 @@ class Monster(physicalobject.PhysicalObject):
         
         # This expression means: there is a 50%
         # chance we will change our horizontal direction.
-        if randint(0, 100) > 50:
+        if randint(0, 100) > 20:
             self.velocity_x *= -1
             
         # This expression means: there is a 50%
         # chance we will change our vertical direction.
-        if randint(0, 100) > 50:
+        if randint(0, 100) > 20:
             self.velocity_y *= -1        
 
     def delete(self):

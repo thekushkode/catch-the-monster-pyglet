@@ -11,12 +11,15 @@ game_window = pyglet.window.Window(WIDTH, HEIGHT)
 main_batch = pyglet.graphics.Batch()
 
 # Load the main music
-theme_song = pyglet.media.load('./resources/music.wav')
+theme_song = pyglet.media.load('./resources/small-trippy.wav')
 music = pyglet.media.Player()
 music.queue(theme_song)
 
+#w Load win music
+#win_song = pyglet.media.load('.resources/win.wav')
+
 # Set up the two top labels
-score_label = pyglet.text.Label(text="Caught 0", x=0, y=0, batch=main_batch)
+score_label = pyglet.text.Label(text="Caught 0", font_name='Comic Sans MS', font_size=20, x=0, y=0, batch=main_batch)
 
 # Initialize the player sprite
 hero = player.Player(x=400, y=300, batch=main_batch)
@@ -41,11 +44,11 @@ is_drawing = True  # Controls whether to show movement
 
 def game_over():
     global is_drawing
-
+    win_label = pyglet.text.Label(text="YOU WON!", font_name='Comic Sans MS', font_size=50, x=100, y=100, batch=main_batch)
     is_drawing = False
     music.pause()
-
-
+    
+    
 def update(dt):
 
     global score
@@ -77,10 +80,15 @@ def update(dt):
             # Remove the object from our list
             game_objects.remove(to_remove)
 
-            score += 1
+            score += 10
             score_label.text = f"Caught {score}"
+            
+            if score == 10:
+                game_over()
+                win_song = pyglet.media.load('./resources/win.wav')
+                win_song.play()
 
-            gotcha_sound_effect = pyglet.media.load('./resources/bullet.wav', streaming=False)
+            gotcha_sound_effect = pyglet.media.load('./resources/ill-kill-you.wav', streaming=False)
             gotcha_sound_effect.play()
 
             # Add a new monster
