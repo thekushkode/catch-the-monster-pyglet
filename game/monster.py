@@ -8,7 +8,7 @@ class Monster(physicalobject.PhysicalObject):
     """Physical object that responds to user input"""
 
     def __init__(self, *args, **kwargs):
-        super().__init__(img=resources.monster_image, *args, **kwargs)
+        super().__init__(img=resources.goblin_image, *args, **kwargs)
 
         self.counter = 0
         self.change_at = randint(20,100)
