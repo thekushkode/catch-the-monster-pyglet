@@ -11,7 +11,7 @@ class Monster(physicalobject.PhysicalObject):
         super().__init__(img=resources.monster_image, *args, **kwargs)
 
         self.counter = 0
-        self.change_at = randint(50,100)
+        self.change_at = randint(20,100)
         self.randomize()
 
     def update(self, dt):
