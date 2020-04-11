@@ -83,7 +83,7 @@ def update(dt):
             score += 10
             score_label.text = f"Caught {score}"
             
-            if score == 10:
+            if score == 100:
                 game_over()
                 win_song = pyglet.media.load('./resources/win.wav')
                 win_song.play()

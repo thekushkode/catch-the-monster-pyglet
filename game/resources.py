@@ -21,7 +21,7 @@ center_image(monster_image)
 goblin_image = pyglet.resource.image("goblin.png")
 center_image(goblin_image)
 
-background = pyglet.resource.image('background.png')
+background = pyglet.resource.image('background1.png')
 
 game_over_img = pyglet.resource.image('gameover.png')
 center_image(game_over_img)
