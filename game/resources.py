@@ -18,6 +18,9 @@ center_image(player_image)
 monster_image = pyglet.resource.image("zombie.png")
 center_image(monster_image)
 
+robot_image = pyglet.resource.image("robot.png")
+center_image(robot_image)
+
 goblin_image = pyglet.resource.image("goblin.png")
 center_image(goblin_image)
 

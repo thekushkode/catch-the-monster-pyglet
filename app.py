@@ -1,5 +1,5 @@
 import pyglet
-from game import player, monster, resources
+from game import player, monster, resources, robot_added
 from random import randint
 
 from config import WIDTH, HEIGHT
@@ -24,9 +24,10 @@ score_label = pyglet.text.Label(text="Caught 0", font_name='Comic Sans MS', font
 # Initialize the player sprite
 hero = player.Player(x=400, y=300, batch=main_batch)
 goblin = monster.Monster(x=randint(0, WIDTH), y=randint(0,HEIGHT), batch=main_batch)
+robot = robot_added.Robot(x=randint(0, WIDTH), y=randint(0,HEIGHT), batch=main_batch)
 
 # Store all objects that update each frame in a list
-game_objects = [hero, goblin]
+game_objects = [hero, goblin, robot]
 
 # Tell the main window that the player object responds to events
 game_window.push_handlers(hero.key_handler)
@@ -62,15 +63,21 @@ def update(dt):
         # This method also avoids the problem of colliding an object with itself.
         for i in range(len(game_objects)):
             for j in range(i + 1, len(game_objects)):
+                for k in range(i + 2, len(game_objects)):
 
-                obj_1 = game_objects[i]
-                obj_2 = game_objects[j]
+                    obj_1 = game_objects[i]
+                    obj_2 = game_objects[j]
+                    obj_3 = game_objects[k]
 
-                # Make sure the objects haven't already been killed
-                if not obj_1.dead and not obj_2.dead:
-                    if obj_1.collides_with(obj_2):
-                        obj_1.handle_collision_with(obj_2)
-                        obj_2.handle_collision_with(obj_1)
+                    # Make sure the objects haven't already been killed
+                    if not obj_1.dead and not obj_2.dead and not obj_3.dead:
+                        if obj_1.collides_with(obj_2):
+                            obj_1.handle_collision_with(obj_2)
+                            obj_2.handle_collision_with(obj_1)
+                        if obj_1.collides_with(obj_3):
+                            obj_1.handle_collision_with(obj_3)
+                            obj_3.handle_collision_with(obj_1)
+
 
         # Get rid of dead objects
         for to_remove in [obj for obj in game_objects if obj.dead]:
